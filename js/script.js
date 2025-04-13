@@ -2,19 +2,19 @@ let score = 0;
 let targetNumber;
 let gameInterval;
 let countdownInterval;
-let timeLeft = 30;  // Змінено час гри на 30 секунд
-let timeForAnswer = 6;  // Початковий час для відповіді (по замовчуванню для легкого рівня)
+let timeLeft = 30;  
+let timeForAnswer = 6;  
 let gameStarted = false;
 let numbers = [];
-let numberRange = 9;  // Максимум 9 чисел на всіх рівнях
-let numberChangeInterval = 6000; // Початковий інтервал для зміни чисел (6 секунд для легкого рівня)
-let selectedDifficulty = '';  // Змінна для зберігання вибраного рівня складності
+let numberRange = 9;  
+let numberChangeInterval = 6000; 
+let selectedDifficulty = '';  
 
 // Завантаження таблиці лідерів
 function loadLeaderboard() {
     const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
     const leaderboardList = document.getElementById('leaderboardList');
-    leaderboardList.innerHTML = ''; // Очищаємо список перед завантаженням
+    leaderboardList.innerHTML = ''; 
 
     leaderboard.forEach((entry, index) => {
         const listItem = document.createElement('li');
@@ -22,22 +22,22 @@ function loadLeaderboard() {
         leaderboardList.appendChild(listItem);
     });
 
-    document.getElementById('leaderboard').style.display = leaderboard.length > 0 ? 'block' : 'none';  // Показуємо таблицю лише якщо є дані
+    document.getElementById('leaderboard').style.display = leaderboard.length > 0 ? 'block' : 'none';  
 }
 
 // Збереження результату в таблиці лідерів
 function saveScore(name, score, difficulty) {
     const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
     leaderboard.push({ name, score, difficulty });
-    leaderboard.sort((a, b) => b.score - a.score); // Сортуємо від найвищого до найнижчого
+    leaderboard.sort((a, b) => b.score - a.score); 
 
-    // Якщо більше 100 записів, видаляємо найгірший
+    
     if (leaderboard.length > 100) {
         leaderboard.pop();
     }
 
     localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
-    loadLeaderboard();  // Оновлюємо таблицю лідерів
+    loadLeaderboard();  
 }
 
 // Генерація чисел в залежності від рівня складності
@@ -46,13 +46,13 @@ function generateNumbers() {
     for (let i = 1; i <= numberRange; i++) {
         numbers.push(i);
     }
-    numbers = numbers.sort(() => Math.random() - 0.5);  // Перемішуємо числа
+    numbers = numbers.sort(() => Math.random() - 0.5);  
 }
 
 // Виведення чисел на екран
 function displayNumbers() {
     const numberContainer = document.getElementById('numberContainer');
-    numberContainer.innerHTML = '';  // Очищаємо контейнер
+    numberContainer.innerHTML = '';  
 
     numbers.forEach(num => {
         const numberElement = document.createElement('div');
@@ -68,7 +68,7 @@ function startGame() {
     if (gameStarted) return;
 
     score = 0;
-    timeLeft = 30;  // Час гри встановлено на 30 секунд
+    timeLeft = 30;  
     gameStarted = true;
 
     document.getElementById('gameArea').style.display = 'block';
@@ -76,12 +76,12 @@ function startGame() {
     document.getElementById('message').textContent = 'Готуйся до гри!';
     document.getElementById('timer').textContent = `Час: ${timeLeft}`;
     document.getElementById('restartButton').style.display = 'none';
-    document.getElementById('difficultySelection').style.display = 'none';  // Сховати вибір складності
-    document.getElementById('startButton').style.display = 'none'; // Ховаємо кнопку "Почати гру"
+    document.getElementById('difficultySelection').style.display = 'none';  
+    document.getElementById('startButton').style.display = 'none'; 
 
     // Стартуємо таймер і змінюємо числа після початку гри
-    generateNumbers(); // Генеруємо числа одразу після старту гри
-    displayNumbers();  // Виводимо числа на екран
+    generateNumbers(); 
+    displayNumbers();  
     targetNumber = numbers[Math.floor(Math.random() * numbers.length)];
     document.getElementById('message').textContent = `Натискайте на ${targetNumber}!`;
 
@@ -90,7 +90,7 @@ function startGame() {
         displayNumbers();
         targetNumber = numbers[Math.floor(Math.random() * numbers.length)];
         document.getElementById('message').textContent = `Натискайте на ${targetNumber}!`;
-    }, numberChangeInterval); // Зміна чисел з інтервалом в залежності від рівня складності
+    }, numberChangeInterval); 
 
     countdownInterval = setInterval(() => {
         timeLeft--;
@@ -98,7 +98,7 @@ function startGame() {
         if (timeLeft <= 0) {
             endGame();
         }
-    }, 1000);  // Таймер кожну секунду
+    }, 1000);  
 }
 
 // Перевірка числа
@@ -106,9 +106,9 @@ function checkNumber(num, numberElement) {
     const messageElement = document.getElementById('message');
     if (num === targetNumber) {
         score++;
-        numberElement.style.backgroundColor = '#4CAF50';  // Зелене підсвічування для правильного числа
+        numberElement.style.backgroundColor = '#4CAF50';  
         messageElement.textContent = `Правильно! Твій рахунок: ${score}`;
-        messageElement.style.color = '#4CAF50';  // Зелений колір тексту
+        messageElement.style.color = '#4CAF50';  
 
         // Затримка перед наступною генерацією
         setTimeout(() => {
@@ -116,13 +116,13 @@ function checkNumber(num, numberElement) {
             displayNumbers();
             targetNumber = numbers[Math.floor(Math.random() * numbers.length)];
             messageElement.textContent = `Натискайте на ${targetNumber}!`;
-            messageElement.style.color = '#333';  // Повертаємо стандартний колір повідомлення
-            numberElement.style.backgroundColor = '#4CAF50';  // Повертаємо колір
-        }, 500);  // 500 мс на відновлення кольору перед зміною числа
+            messageElement.style.color = '#333';  
+            numberElement.style.backgroundColor = '#4CAF50';  
+        }, 500);  
     } else {
-        numberElement.style.backgroundColor = '#f44336';  // Червоне підсвічування для неправильного числа
+        numberElement.style.backgroundColor = '#f44336';  
         messageElement.textContent = `Помилка! Твій рахунок: ${score}`;
-        messageElement.style.color = '#f44336';  // Червоний колір тексту
+        messageElement.style.color = '#f44336';  
         setTimeout(() => numberElement.style.backgroundColor = '', 500);
     }
 }
@@ -135,7 +135,7 @@ function endGame() {
     document.getElementById('gameArea').style.display = 'none';
     document.getElementById('gameResult').style.display = 'block';
     document.getElementById('score').textContent = `Твій рахунок: ${score}`;
-    document.getElementById('leaderboard').style.display = 'block';  // Показуємо таблицю лідерів
+    document.getElementById('leaderboard').style.display = 'block';  
 
     // Показуємо кнопку зберегти результат
     document.getElementById('saveScore').style.display = 'inline-block';
@@ -145,11 +145,11 @@ function endGame() {
         const userName = document.getElementById('userName').value;
         if (userName) {
             saveScore(userName, score, selectedDifficulty);
-            document.getElementById('userName').value = '';  // Очищаємо поле введення
+            document.getElementById('userName').value = '';  
         }
     });
 
-    document.getElementById('restartButton').style.display = 'block'; // Показуємо кнопку для перезапуску гри
+    document.getElementById('restartButton').style.display = 'block'; 
 }
 
 // Перезапуск гри
@@ -194,5 +194,4 @@ document.getElementById('startButton').addEventListener('click', startGame);
 document.getElementById('restartButton').addEventListener('click', restartGame);
 document.getElementById('resetLeaderboardButton').addEventListener('click', resetLeaderboard);
 
-// Завантажуємо таблицю лідерів при старті сторінки
 loadLeaderboard();
