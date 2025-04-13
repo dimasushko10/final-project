@@ -1,0 +1,67 @@
+@import './global.footer.css';
+@import './global.header.css';
+
+.why-play {
+    background-color: #fff;
+    padding: 40px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    text-align: center;
+  }
+  
+  .why-play h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #2c3e50;
+  }
+  
+  .why-play p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+  }
+  
+  .benefits-list {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 20px;
+  }
+  
+  .benefits-list li {
+    font-size: 16px;
+    color: #333;
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .benefits-list li::before {
+    content: "✔";
+    margin-right: 10px;
+    color: #27ae60;
+    font-weight: bold;
+  }
+  
+  .try-button {
+    background-color: #27ae60;
+    color: white;
+    padding: 12px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+
+  .try-button:hover {
+    background-color: #2ecc71;
+  }
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+  

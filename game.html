@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numbers Game</title>
+    <link rel="stylesheet" href="/css/game.css">
+</head>
+<body>
+
+    <div id="difficultySelection">
+        <h2>Виберіть рівень складності:</h2>
+        <div id="difficultyLevels">
+            <div id="easyButton" class="difficultyButton">Легкий</div>
+            <div id="mediumButton" class="difficultyButton">Середній</div>
+            <div id="hardButton" class="difficultyButton">Складний</div>
+        </div>
+    </div>
+    
+
+    <button id="startButton" style="display:none;">Почати гру</button>
+
+    <div id="gameArea" style="display:none;">
+        <h1>Гра з числами</h1>
+        <div id="message">Готуйся до гри!</div>
+        <div id="timer">Час: 30</div>
+        <div id="numberContainer"></div>
+    </div>
+
+    <div id="gameResult" style="display:none;">
+        <h2>Гра закінчена!</h2>
+        <div id="score">Твій рахунок: 0</div>
+        <div id="inputContainer">
+            <input type="text" id="userName" placeholder="Введіть своє ім'я">
+        </div>
+        <div id="buttonContainer">
+            <button id="saveScore" style="display:none;">Зберегти результат</button>
+            <button id="restartButton">Перезапустити гру</button>
+        </div>
+    </div>
+
+    <div id="leaderboard" style="display:none;">
+        <h2>Таблиця лідерів</h2>
+        <ul id="leaderboardList"></ul>
+        <button id="resetLeaderboardButton">Скинути таблицю лідерів</button>
+    </div>
+
+    <script src="js/script.js"></script>
+
+</body>
+</html>

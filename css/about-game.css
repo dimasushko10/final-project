@@ -1,0 +1,54 @@
+@import './global.footer.css';
+@import './global.header.css';
+
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f0f4f8;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  h1, h2 {
+    color: #2c3e50;
+  }
+
+  h1 {
+    margin-bottom: 10px;
+  }
+
+  .feature-list {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .feature-list li {
+    padding: 8px 0;
+    padding-left: 30px;
+    position: relative;
+  }
+
+  .feature-list li::before {
+    content: "\2713";
+    position: absolute;
+    left: 0;
+    color: #27ae60;
+    font-weight: bold;
+  }
+
+  .footer {
+    margin-top: 40px;
+    font-size: 0.9em;
+    text-align: center;
+    color: #777;
+  }
